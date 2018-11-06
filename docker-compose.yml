@@ -1,0 +1,35 @@
+version: '3'
+
+networks:
+  sivnet:
+    external: true
+
+services:
+  reverse-proxy:
+    image: traefik
+    command: --api --docker
+    ports:
+      - "80:80"
+      - "443:443"
+      - "8080:8080"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - ./traefik/traefik.toml:/etc/traefik/traefik.toml:ro
+      - ./traefik/acme:/etc/traefik/acme
+      - ./traefik/.htpasswd:/etc/traefik/.htpasswd
+    networks:
+      - sivnet
+    labels:
+      - traefik.enable=false
+  # TODO figure out how to redirect in traefik
+  redirect:
+    image: nginx:1.15.5-alpine
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./nginx/alysivji.com:/etc/nginx/sites-enabled/alysivji.com:ro
+    networks:
+      - sivnet
+    labels:
+      - traefik.enable=true
+      - traefik.frontend.rule=Host:www.alysivji.com,alysivji.com
+      - traefik.backend=nginx
