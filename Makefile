@@ -1,2 +1,2 @@
 up:
-	docker-compose up --scale whoami=5
+	docker-compose up -d

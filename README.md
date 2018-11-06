@@ -8,3 +8,8 @@ Using a combination of [Traefik](https://github.com/containous/traefik) and [NGI
 Todo: figure out how to get external redirects working in traefik. Don't aren't the best and there doesn't seem to be an obvious way to do things.
 
 Right now let's build it out and come back to this.
+
+## Instructions
+
+1. `docker network create sivnet`
+2. `make up`
