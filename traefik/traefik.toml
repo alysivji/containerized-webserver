@@ -18,6 +18,5 @@ onHostRule = true
   entryPoint = "http"
 
 [docker]
-domain = "alysivji.com"
 network = "sivnet"
 watch = true

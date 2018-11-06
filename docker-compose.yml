@@ -24,6 +24,8 @@ services:
   # TODO figure out how to redirect in traefik
   redirect:
     image: nginx:1.15.5-alpine
+    depends_on:
+      - reverse-proxy
     volumes:
       - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
       - ./nginx/alysivji.com:/etc/nginx/sites-enabled/alysivji.com:ro
@@ -31,5 +33,5 @@ services:
       - sivnet
     labels:
       - traefik.enable=true
-      - traefik.frontend.rule=Host:www.alysivji.com,alysivji.com
       - traefik.backend=nginx
+      - traefik.frontend.rule=Host:alysivji.com,www.alysivji.com
