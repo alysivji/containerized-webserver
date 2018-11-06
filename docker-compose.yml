@@ -15,7 +15,7 @@ services:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
       - ./traefik/traefik.toml:/etc/traefik/traefik.toml:ro
-      - ./traefik/acme:/etc/traefik/acme
+      - ./traefik/acme.json:/etc/traefik/acme.json
       - ./traefik/.htpasswd:/etc/traefik/.htpasswd
     networks:
       - sivnet
